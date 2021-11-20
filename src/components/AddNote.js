@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import NoteItem from "./NoteItem";
+import noteContext from "../context/notes/notesContext";
 
 function AddNote() {
+  const context = useContext(noteContext);
+  const {notes, setNotes} = context;
   return (
     <>
       <div class="mb-3">
@@ -29,11 +32,11 @@ function AddNote() {
       </button>
 
       <h2 className="my-5">View Notes</h2>
-      <NoteItem/>
-      <NoteItem/>
-      <NoteItem/>
-      <NoteItem/>
-      <NoteItem/>
+      <div class="row">
+      {notes.map((note) => {
+        return <NoteItem title={note.title} description={note.description}/>;
+      })}
+      </div>
     </>
   );
 }
