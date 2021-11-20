@@ -41,91 +41,39 @@ const NoteState = (props) => {
       "date": "2021-11-18T04:28:09.291Z",
       "__v": 0
     },
-    {
-      "_id": "6195d6596068205b5566df4b",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-18T04:28:09.453Z",
-      "__v": 0
-    },
-    {
-      "_id": "6195d6596068205b5566df4d",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-18T04:28:09.630Z",
-      "__v": 0
-    },
-    {
-      "_id": "6195d6596068205b5566df4f",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-18T04:28:09.774Z",
-      "__v": 0
-    },
-    {
-      "_id": "6195d6596068205b5566df51",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-18T04:28:09.932Z",
-      "__v": 0
-    },
-    {
-      "_id": "6195d65a6068205b5566df53",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-18T04:28:10.152Z",
-      "__v": 0
-    },
-    {
-      "_id": "619714175a3aa9596f6d8015",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-19T03:03:51.390Z",
-      "__v": 0
-    },
-    {
-      "_id": "619714195a3aa9596f6d8017",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-19T03:03:53.385Z",
-      "__v": 0
-    },
-    {
-      "_id": "6197141b5a3aa9596f6d8019",
-      "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
-      "date": "2021-11-19T03:03:55.436Z",
-      "__v": 0
-    },
-    {
+  ]
+  const [notes, setnotes] = useState(initialNote)
+
+  //Add a note
+  const addNote = ({title, description, tag}) =>{
+    console.log("Adding new note")
+    const note = {
       "_id": "6197141c5a3aa9596f6d801b",
       "user": "619477d73db70eff83aaf58e",
-      "title": "My First Note",
-      "description": "Get the end points correct",
-      "tag": "work",
+      "title": title,
+      "description": description,
+      "tag": tag,
       "date": "2021-11-19T03:03:56.591Z",
       "__v": 0
     }
-  ]
-  const [notes, setnotes] = useState(initialNote)
+    setnotes(notes.concat(note));
+  }
+
+  //Delete a note
+  const deleteNote = (id) =>{
+    console.log("Note deleted." + id);
+    const newNotes = notes.filter((note) => {return note._id !== id})
+    setnotes(newNotes);
+  }
+
+  //Edit a note
+  const editNote = () =>{
+
+  }
   return (
-    <NoteContext.Provider value={{notes, setnotes}}>{props.children}</NoteContext.Provider>
+    <NoteContext.Provider 
+      value={{notes, addNote, deleteNote, editNote}}>{props.children}
+    </NoteContext.Provider>
   );
 };
 

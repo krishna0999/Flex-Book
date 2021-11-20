@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../NoteItem.css";
+import noteContext from "../context/notes/notesContext";
 
-function NoteItem(props) {
+const NoteItem = (props) => {
+  const context = useContext(noteContext);
+  const {deleteNote} = context;
+  const {note} = props;
   return (
-    <div class="card col-md-3 bg-dark m-1">
-      <div class="card-body">
-        <h5 class="card-title">{props.title}</h5>
-        <p class="card-text">
-          {props.description}
+    <div className="card col-md-3 bg-dark m-1">
+      <div className="card-body">
+        <h5 className="card-title">{note.title}</h5>
+        <p className="card-text">
+          {note.description}
         </p>
-        <Link to="/notedetails" class="btn btn-primary">
+        <Link to="/notedetails" className="btn btn-primary">
           Open note
         </Link>
+        <i className="fas fa-minus-circle fa-lg m-2" style={{color : 'red'}} onClick={() => {
+          deleteNote(note._id);
+        }}></i>
+        <i className="fas fa-pen-square fa-lg m-2" style={{color : '#6498ed'}}></i>
       </div>
     </div>
   );
