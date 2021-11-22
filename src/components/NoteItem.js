@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import "../NoteItem.css";
 import noteContext from "../context/notes/notesContext";
 
@@ -14,9 +13,6 @@ const NoteItem = (props) => {
         <p className="card-text">
           {note.description}
         </p>
-        <Link to="/notedetails" className="btn btn-primary">
-          Open note
-        </Link>
         <i className="fas fa-minus-circle fa-lg m-2" style={{color : 'red'}} onClick={() => {
           deleteNote(note._id);
         }}></i>

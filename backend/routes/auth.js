@@ -58,6 +58,7 @@ router.post('/login',[
   body('email', "Enter a valid email").isEmail(),
   body('password', "Password cannot be set to blank").exists(),
 ], async (req,res) => {
+  let success = false;
 //Proceed if there are no errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -73,7 +74,8 @@ router.post('/login',[
 
     const comparePass = await bcrypt.compare(password,user.password);
     if(!comparePass){
-      return res.status(400).json({error : "Please enter correct login credentials."});
+      success = false;
+      return res.status(400).json({success, error : "Please enter correct login credentials."});
     }
 
     const data = {
@@ -83,7 +85,8 @@ router.post('/login',[
     }
     const authToken = jwt.sign(data,JWT_SIGN); //Creating an token to send the user for future authentication
     console.log(authToken);
-    res.json({authToken});
+    success = true;
+    res.json({ success, authToken});
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal error occured");
