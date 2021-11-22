@@ -61,6 +61,7 @@ function AddNote() {
           name="title"
           className="form-control"
           onChange={onChangeHandle}
+          min={4}
         />
         <div id="title-note" className="form-text">
           Add a title to your note.
@@ -75,6 +76,7 @@ function AddNote() {
           name="description"
           style={{ height: "120px" }}
           onChange={onChangeHandle}
+          min={5}
         ></textarea>
       </div>
       <div className="mb-3">
@@ -89,7 +91,7 @@ function AddNote() {
           onChange={onChangeHandle}
         />
       </div>
-      <button type="submit" className="btn btn-success" onClick={handleAddClick}>
+      <button disabled={note.title.length<4 || note.description.length<5} type="submit" className="btn btn-success" onClick={handleAddClick}>
         Add
       </button>
 
@@ -137,6 +139,7 @@ function AddNote() {
                   className="form-control"
                   onChange={onChangeHandle2}
                   value={note2.etitle}
+                  min={4}
                 />
                 <div id="title-note" className="form-text">
                   Add a title to your note.
@@ -152,6 +155,7 @@ function AddNote() {
                   style={{ height: "120px" }}
                   onChange={onChangeHandle2}
                   value={note2.edescription}
+                  min={5}
                 ></textarea>
               </div>
               <div className="mb-3">
@@ -191,8 +195,8 @@ function AddNote() {
           return (
             <NoteItem
               key={note._id}
-              title={note.title.slice(0, 45)}
-              description={note.description.slice(0, 45)}
+              title={note.title.slice(0,20)}
+              description={note.description.slice(0,45)}
               note={note}
               updateNote={updateNote}
             />
